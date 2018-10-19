@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Project01</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Fragmentos en blanco</string>
+    <string name="form_fragment">9:28	Project setup started
+
+9:28	Gradle sync finished in 4 s 862 ms (from cached state)
+
+10:13	Executing tasks: [:app:assembleDebug]
+
+10:14	Gradle build finished in 50 s 882 ms
+
+Android 5.1 (Google APIs) API 22
+        Packages to install:
+- Google APIs Intel x86 Atom System Image (system-images;android-22;google_apis;x86)
+
+Preparing "Install Google APIs Intel x86 Atom System Image (revision: 22)".
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/x86-22_r22.zip
+"Install Google APIs Intel x86 Atom System Image (revision: 22)" ready.
+Installing Google APIs Intel x86 Atom System Image in C:\Users\gsierra\AppData\Local\Android\Sdk\system-images\android-22\google_apis\x86
+"Install Google APIs Intel x86 Atom System Image (revision: 22)" complete.
+"Install Google APIs Intel x86 Atom System Image (revision: 22)" finished.</string>
+</resources>
