@@ -19,9 +19,10 @@ import com.example.gsierra.project01.Fragments.BlueFragment;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
 import com.example.gsierra.project01.Fragments.GreenFragment;
+import com.example.gsierra.project01.Fragments.ListaClientesFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,8 @@ public class MainActivity extends AppCompatActivity
             miFrag = new ContenedorFragment();
             fSeleccionado = true;
         } else if (id == R.id.nav_send) {
-
+            miFrag = new ListaClientesFragment();
+            fSeleccionado = true;
         }
 
         if (fSeleccionado==true)
