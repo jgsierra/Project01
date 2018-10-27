@@ -10,14 +10,14 @@ import java.util.List;
 
 public class SeccionesAdapters extends FragmentStatePagerAdapter {
 
-    private final List<Fragment> listFragments = new ArrayList<>();
+    private final List<Fragment> listaFragments = new ArrayList<>();
 
-    private final List<String> listTitulos = new ArrayList<>();
+    private final List<String> listaTitulos = new ArrayList<>();
 
     public void addFragment(Fragment fragment, String titulo)
     {
-        listFragments.add(fragment);
-        listTitulos.add(titulo);
+        listaFragments.add(fragment);
+        listaTitulos.add(titulo);
     }
 
     public SeccionesAdapters(FragmentManager fm) {
@@ -27,18 +27,16 @@ public class SeccionesAdapters extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return listTitulos.get(position);
-
-
+        return listaTitulos.get(position);
     }
 
     @Override
     public Fragment getItem(int i) {
-        return null;
+        return listaFragments.get(i);
     }
 
     @Override
     public int getCount() {
-        return listFragments.size();
+        return listaFragments.size();
     }
 }
