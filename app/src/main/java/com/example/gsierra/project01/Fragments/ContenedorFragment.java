@@ -3,6 +3,7 @@ package com.example.gsierra.project01.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gsierra.project01.Adapters.SeccionesAdapters;
+import com.example.gsierra.project01.Helper.Utilidades;
 import com.example.gsierra.project01.R;
 
 /**
@@ -51,26 +53,34 @@ public class ContenedorFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_contenedor, container, false);
-        View parent = (View) container.getParent();  //app_bar_main ess el parent
 
-        if(appBar == null)
+        if(Utilidades.rotacion==0)
         {
-            appBar = (AppBarLayout) parent.findViewById(R.id.appBar);
-            pestañas = new TabLayout(getContext());
-            appBar.addView(pestañas);
-            viewPager = (ViewPager) vista.findViewById(R.id.viewPagerInformacion);
-
-            llenarViewPager(viewPager);
-            viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
+            View parent = (View) container.getParent();  //app_bar_main ess el parent
+            if(appBar == null)
             {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                }
-            });
-            pestañas.setupWithViewPager(viewPager);
+                appBar = (AppBarLayout) parent.findViewById(R.id.appBar);
+                pestañas = new TabLayout(getContext());
+                appBar.addView(pestañas);
+                viewPager = (ViewPager) vista.findViewById(R.id.viewPagerInformacion);
 
+                llenarViewPager(viewPager);
+                viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
+                {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                    }
+                });
+                pestañas.setupWithViewPager(viewPager);
+            }
+            pestañas.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        }else
+        {
+            Utilidades.rotacion=1;
         }
+
         return vista;
     }
 
@@ -87,6 +97,16 @@ public class ContenedorFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //cada vez que salgo desstruyo las pestañas
+        if(Utilidades.rotacion==0)
+        {
+            appBar.removeView(pestañas);
         }
     }
 
