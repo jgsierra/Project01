@@ -35,4 +35,7 @@
         </menu>
     </item>
 
+    <item
+        android:id="@+id/salir"
+        android:title="Salir" />
 </menu>

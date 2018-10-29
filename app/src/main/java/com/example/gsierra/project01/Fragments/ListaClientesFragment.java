@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.R;
@@ -43,6 +44,7 @@ public class ListaClientesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerClientes;
     ReciclerViewAdapter adaptadorCliente;
+    ProgressBar pb;
     public ListaClientesFragment() {
         // Required empty public constructor
     }
@@ -74,6 +76,7 @@ public class ListaClientesFragment extends Fragment {
 
         recyclerClientes = vista.findViewById(R.id.reciclerCliente);
         recyclerClientes.setLayoutManager(new LinearLayoutManager(getContext()));
+        pb = vista.findViewById(R.id.pbar);
         //como no estamos en una activity se pone getContext() en lugar de this
 
         ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
@@ -84,6 +87,8 @@ public class ListaClientesFragment extends Fragment {
                 List<Clientes> clientes = (List<Clientes>) response.body();
                 adaptadorCliente = new ReciclerViewAdapter(clientes);
                 recyclerClientes.setAdapter(adaptadorCliente);
+                recyclerClientes.setVisibility(View.VISIBLE);
+                pb.setVisibility(View.GONE);
             }
 
             @Override

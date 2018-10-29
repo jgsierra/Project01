@@ -1,10 +1,12 @@
 package com.example.gsierra.project01;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +110,29 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             miFrag = new ListaClientesFragment();
             fSeleccionado = true;
-        }
+        } else if (id == R.id.salir){
+        AlertDialog.Builder  builder = new AlertDialog.Builder(this);
 
+        builder.setTitle("Salir");
+        builder.setMessage("Seguro que desea salir?");
+
+        builder.setPositiveButton("salir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.show();
+
+        fSeleccionado = false;
+        }
         if (fSeleccionado==true)
         {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).commit();
