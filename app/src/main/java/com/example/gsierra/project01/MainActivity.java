@@ -22,6 +22,8 @@ import com.example.gsierra.project01.Fragments.ContenedorFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
 import com.example.gsierra.project01.Fragments.GreenFragment;
 import com.example.gsierra.project01.Fragments.ListaClientesFragment;
+import com.example.gsierra.project01.Helper.Utilidades;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,13 +111,21 @@ public class MainActivity extends AppCompatActivity
             miFrag = new ContenedorFragment();
             fSeleccionado = true;
         } else if (id == R.id.nav_send) {
-            miFrag = new ListaClientesFragment();
-            fSeleccionado = true;
-        } else if (id == R.id.salir){
-        AlertDialog.Builder  builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Salir");
-        builder.setMessage("Seguro que desea salir?");
+            miFrag = new ListaClientesFragment();
+
+            if (showSnackIfOffline())
+            {fSeleccionado = true;}
+            else
+            { fSeleccionado = false; }
+
+        } else if (id == R.id.salir){
+        //AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder =
+                    new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle("Estás por salir de la aplicación");
+        builder.setMessage("¿Confirmas la operación?");
 
         builder.setPositiveButton("salir", new DialogInterface.OnClickListener() {
             @Override
@@ -129,10 +140,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        AlertDialog dialog = builder.show();
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
 
         fSeleccionado = false;
         }
+
         if (fSeleccionado==true)
         {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).commit();
@@ -146,5 +160,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+    private boolean showSnackIfOffline(){
+        final boolean online = Utilidades.isOnline();
+
+        runOnUiThread(new TimerTask() { //must run on main thread to update UI (show Snackbar), can be used only in Activity (FragmentActivity, AppCompatActivity...)
+            @Override
+            public void run() {
+                if(!online)
+                    Snackbar.make(findViewById(R.id.nav_view), "@string/No_Network_Connection", Snackbar.LENGTH_SHORT);
+
+                else{
+                    Snackbar.make(findViewById(R.id.nav_view), "@string/Connection", Snackbar.LENGTH_SHORT);
+
+                }
+            }
+        });
+        return   online;
     }
 }

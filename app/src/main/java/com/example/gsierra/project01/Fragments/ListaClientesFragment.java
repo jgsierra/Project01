@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
+import com.example.gsierra.project01.Helper.Utilidades;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
 import com.example.gsierra.project01.services.APIClient;
 import com.example.gsierra.project01.services.ClienteService;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,6 +79,9 @@ public class ListaClientesFragment extends Fragment {
         pb = vista.findViewById(R.id.pbar);
         //como no estamos en una activity se pone getContext() en lugar de this
 
+
+
+
         ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
         Call call = clienteService.getAll();
         call.enqueue(new Callback() {
@@ -137,4 +140,10 @@ public class ListaClientesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
+
+
 }
