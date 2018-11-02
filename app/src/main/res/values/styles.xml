@@ -17,4 +17,17 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--item RadioButton or CheckBox color-->
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <!--item text color-->
+        <item name="textColorAlertDialogListItem">@android:color/white</item>
+        <!--buttons color-->
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog</item>
+    </style>
 </resources>

@@ -6,7 +6,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="No_Network_Connection">Sin Conexión</string>
+    <string name="Connection">Conectado</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Fragmentos en blanco</string>
     <string name="form_fragment">9:28	Project setup started
