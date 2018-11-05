@@ -1,48 +1,33 @@
 package com.example.gsierra.project01.Fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.DatePicker;
+import android.widget.TextView;
 import com.example.gsierra.project01.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EditClienteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EditClienteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Calendar;
+
+
 public class EditClienteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDataSetListener;
 
     public EditClienteFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditClienteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static EditClienteFragment newInstance(String param1, String param2) {
         EditClienteFragment fragment = new EditClienteFragment();
 
@@ -53,10 +38,6 @@ public class EditClienteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -65,9 +46,35 @@ public class EditClienteFragment extends Fragment {
         // Inflate the layout for this fragment
         final View vista = inflater.inflate(R.layout.fragment_edit_cliente, container, false);
 
+        mDisplayDate = (TextView)vista.findViewById(R.id.tvFechaNac);
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int anio = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog  = new DatePickerDialog(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth,
+                        mDataSetListener,
+                        anio,mes,dia);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GREEN));
+                dialog.show();
+                }
+        });
+
+        mDataSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String fecha = dayOfMonth + "/" + month + "/" + year;
+             mDisplayDate.setText(fecha);
+            }
+        };
+
         return vista;
 
-//        return inflater.inflate(R.layout.fragment_edit_cliente, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

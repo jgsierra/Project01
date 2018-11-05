@@ -11,7 +11,8 @@ tools:context=".Fragments.EditClienteFragment"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -24,220 +25,255 @@ tools:context=".Fragments.EditClienteFragment"
             android:id="@+id/idClientec"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Num°"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvNombrec"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Nombre"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvNombrel"
             android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvApellidoc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Apellido"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvApellidol"
             android:layout_width="275dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvAedaddc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Edad"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvEdad"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvFENNc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Fecha Nac:"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="273dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvCiudadc"
-            android:layout_width="62dp"
+            android:id="@+id/tvFechaNac"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ciudad"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
-        <Spinner
-            android:id="@+id/sp_ciudad"
-            android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvProvvc"
-            android:layout_width="274dp"
+            <TextView
+                android:id="@+id/tvCiudadc"
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Ciudad"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/sp_ciudad"
+                android:layout_width="274dp"
+                android:layout_height="match_parent"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Provincia"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/sp_provi"
-            android:layout_width="274dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/Provincias"/>
+            <TextView
+                android:id="@+id/tvProvvc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Provincia"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/sp_provi"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/Provincias"
+                android:padding="10dp" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvDireccionc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Direccion"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvDireccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvTelFijoc"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Tel Fijo"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvTeleFijo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvTelMovilc"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Tel Movil"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvTeleMovil"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
 
-        <TextView
-            android:id="@+id/tvEmail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvTelSexoc"
-            android:layout_width="274dp"
             android:layout_height="wrap_content"
-            android:text="Sexo"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/sp_sexo"
-            android:layout_width="274dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/Sexo" />
+            <TextView
+                android:id="@+id/tvTelSexoc"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Sexo"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvOcupacionc"
-            android:layout_width="274dp"
-            android:layout_height="wrap_content"
-            android:text="Ocupacion"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <Spinner
+                android:id="@+id/sp_sexo"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/Sexo"
+                android:padding="10dp" />
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sp_ocup"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/Ocupaciones" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvOcupacionc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Ocupacion"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/sp_ocup"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/Ocupaciones"
+        android:padding="10dp" />
+
+</LinearLayout>
+
 
         <TextView
             android:id="@+id/tvEMailc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="Email"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tvEmailM"
             android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
         <!--</LinearLayout>-->
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnAceptar"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Aceptar"
-            android:visibility="visible" />
+            <Button
+                android:id="@+id/btnAceptar"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:text="Aceptar"
+                android:visibility="visible" />
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar" />
 
-        <!--<Button-->
-        <!--android:id="@+id/btnSearch"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:drawableEnd="@android:drawable/ic_menu_search"-->
-        <!--android:text="Buscar" />-->
+            <!--<Button-->
+            <!--android:id="@+id/btnSearch"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableEnd="@android:drawable/ic_menu_search"-->
+            <!--android:text="Buscar" />-->
         </LinearLayout>
     </LinearLayout>
 
