@@ -20,4 +20,7 @@ public interface ClienteService {
 
     @POST("Add")
     Call<Void> create(@Body Clientes cliente);
+
+    @GET("Clientes/{keyword}")
+    Call<List<Clientes>> getAllFilter();
 }

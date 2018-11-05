@@ -14,6 +14,8 @@ public class Utilidades {
         }
         return false;
     }
+
+
 //
 //    public static boolean isConnectedToInternet(Context context) {
 //        ConnectivityManager cm =

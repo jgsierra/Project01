@@ -1,6 +1,7 @@
 package com.example.gsierra.project01;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 
 import com.example.gsierra.project01.Fragments.BlueFragment;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
+import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
 import com.example.gsierra.project01.Fragments.GreenFragment;
 import com.example.gsierra.project01.Fragments.ListaClientesFragment;
@@ -26,7 +28,7 @@ import com.example.gsierra.project01.Helper.Utilidades;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,EditClienteFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,23 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                final boolean online = Utilidades.isOnline();
+                String resul;
+                if (!online){
+                    resul = "Sin conexion";
+                }
+                else {
+                    resul = "conectado";
+                }
+                Snackbar.make(view,resul, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+
+                Fragment miFrag = new EditClienteFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).commit();
+
+
+                //startActivity(new Intent(MainActivity.this,MainEditActivity.class));
             }
         });
 
@@ -56,11 +73,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            salir();
+            //super.onBackPressed();
         }
     }
 
@@ -114,35 +134,14 @@ public class MainActivity extends AppCompatActivity
 
             miFrag = new ListaClientesFragment();
 
-            if (showSnackIfOffline())
+            if (showSnackIfOffline(findViewById(R.id.content_main)))
             {fSeleccionado = true;}
             else
             { fSeleccionado = false; }
 
         } else if (id == R.id.salir){
-        //AlertDialog.Builder  builder = new AlertDialog.Builder(this);
-        AlertDialog.Builder builder =
-                    new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle("Estás por salir de la aplicación");
-        builder.setMessage("¿Confirmas la operación?");
-
-        builder.setPositiveButton("salir", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-
-        builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
+        salir();
 
         fSeleccionado = false;
         }
@@ -157,25 +156,44 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void salir() {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle("Estás por salir de la aplicación");
+        builder.setMessage("¿Confirmas la operación?");
+
+        builder.setPositiveButton("salir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();}
+
+        });
+
+        builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
-    private boolean showSnackIfOffline(){
+    private boolean showSnackIfOffline(View vista) {
         final boolean online = Utilidades.isOnline();
 
-        runOnUiThread(new TimerTask() { //must run on main thread to update UI (show Snackbar), can be used only in Activity (FragmentActivity, AppCompatActivity...)
-            @Override
-            public void run() {
-                if(!online)
-                    Snackbar.make(findViewById(R.id.nav_view), "@string/No_Network_Connection", Snackbar.LENGTH_SHORT);
+        if (!online)
+            Snackbar.make(vista,R.string.No_Network_Connection, Snackbar.LENGTH_LONG).show();
 
-                else{
-                    Snackbar.make(findViewById(R.id.nav_view), "@string/Connection", Snackbar.LENGTH_SHORT);
+        else
+            Snackbar.make(vista, R.string.Connection, Snackbar.LENGTH_LONG).show();
 
-                }
-            }
-        });
-        return   online;
+        return online;
     }
 }

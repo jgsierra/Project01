@@ -28,4 +28,25 @@ Downloading https://dl.google.com/android/repository/sys-img/google_apis/x86-22_
 Installing Google APIs Intel x86 Atom System Image in C:\Users\gsierra\AppData\Local\Android\Sdk\system-images\android-22\google_apis\x86
 "Install Google APIs Intel x86 Atom System Image (revision: 22)" complete.
 "Install Google APIs Intel x86 Atom System Image (revision: 22)" finished.</string>
+
+    <string-array name="Provincias">
+        <item>Buenos Aires</item>
+        <item>Santa Fe</item>
+        <item>Cordoba</item>
+        <item>Entre Rios</item>
+        <item>Misiones</item>
+        <item>Tucuman</item>
+    </string-array>
+
+    <string-array name="Sexo">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+    <string-array name="Ocupaciones">
+        <item>Programador</item>
+        <item>Albañil</item>
+        <item>Ingenierio</item>
+        <item>Policia</item>
+    </string-array>
+
 </resources>
