@@ -18,9 +18,11 @@ public interface ClienteService {
     @GET("Clientes/{id}")
     Call<Clientes> find(@Query("id") int id);
 
+    @GET("ClientesFilter/{keyword}")
+    Call<List<Clientes>> getAllFiltered();
+
     @POST("Add")
     Call<Void> create(@Body Clientes cliente);
 
-    @GET("Clientes/{keyword}")
-    Call<List<Clientes>> getAllFilter();
+
 }

@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.gsierra.project01.Adapters.SeccionesAdapters;
 import com.example.gsierra.project01.Helper.Utilidades;
+import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 
 /**
@@ -73,6 +76,7 @@ public class ContenedorFragment extends Fragment {
                     }
                 });
                 pestañas.setupWithViewPager(viewPager);
+
             }
             pestañas.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -141,4 +145,29 @@ public class ContenedorFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            onResume();
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!getUserVisibleHint()) {
+            return;
+        }
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity != null) {
+
+            mainActivity.hideFloatingActionButton();
+
+        }
+    }
+
 }
