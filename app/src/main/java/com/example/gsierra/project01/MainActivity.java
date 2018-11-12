@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -27,7 +28,7 @@ import com.example.gsierra.project01.Helper.Utilidades;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,EditClienteFragment.OnFragmentInteractionListener {
-
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,4 +195,14 @@ public class MainActivity extends AppCompatActivity
 
         return online;
     }
+
+
+    public void showFloatingActionButton() {
+        fab.show();
+    }
+
+    public void hideFloatingActionButton() {
+        fab.hide();
+    }
+
 }
