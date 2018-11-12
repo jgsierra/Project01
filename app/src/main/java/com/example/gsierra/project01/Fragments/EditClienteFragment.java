@@ -7,8 +7,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.R;
+import com.example.gsierra.project01.entidades.Clientes;
+import com.example.gsierra.project01.services.APIClient;
+import com.example.gsierra.project01.services.ClienteService;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,17 +36,11 @@ import com.example.gsierra.project01.R;
  * create an instance of this fragment.
  */
 public class EditClienteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-
+    private  int idcliente;
     private OnFragmentInteractionListener mListener;
-
+    private TextView tvcodigo,tvEdad;
+    private EditText etNombrel,etApellidol,etFecha,etDireccion,etTeleFijo,etTeleMovil,etEmailM;
+    private Spinner sp_ciudad,sp_provi,sp_sexo,sp_ocup;
     public EditClienteFragment() {
         // Required empty public constructor
     }
@@ -43,9 +54,8 @@ public class EditClienteFragment extends Fragment {
      * @return A new instance of fragment EditClienteFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditClienteFragment newInstance(String param1, String param2) {
+    public static EditClienteFragment newInstance(int param1, String param2) {
         EditClienteFragment fragment = new EditClienteFragment();
-
         return fragment;
     }
 
@@ -53,11 +63,11 @@ public class EditClienteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,11 +75,77 @@ public class EditClienteFragment extends Fragment {
         // Inflate the layout for this fragment
         final View vista = inflater.inflate(R.layout.fragment_edit_cliente, container, false);
 
+        int var = getArguments().getInt("pIdCliente");
+
+        prepareUI(vista);
+
+        if (var > 0)
+        {
+            this.idcliente =var;
+
+            ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
+            Call call = clienteService.find(idcliente);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    Clientes cliente = (Clientes) response.body();
+                    if (cliente !=null)
+                    {
+                        tvcodigo.setText(String.valueOf(cliente.getCodigo()));
+                        etNombrel.setText(cliente.getNombre(),TextView.BufferType.EDITABLE);
+                        etApellidol.setText(cliente.getApellido(),TextView.BufferType.EDITABLE);
+                        tvEdad.setText(String.valueOf(cliente.getEdad()));
+                        etTeleFijo.setText(cliente.getTelef_fijo(),TextView.BufferType.EDITABLE);
+                        etTeleMovil.setText(cliente.getTelef_movil(),TextView.BufferType.EDITABLE);
+                        etEmailM.setText(cliente.getEmail(),TextView.BufferType.EDITABLE);
+                        etDireccion.setText(cliente.getDireccion(),TextView.BufferType.EDITABLE);
+
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-mm-yyyy");
+                        Date fecha = null;
+                        try {
+                            fecha = formatoFecha.parse(cliente.getFecha_Nac());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        etFecha.setText(cliente.getFecha_Nac());
+//                    sp_ciudad
+//                    sp_provi
+//                    sp_sexo
+//                    sp_ocup
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(),"Cliente no existente",Toast.LENGTH_LONG).show();
+                    }
+                    //recyclerClientes.setVisibility(View.VISIBLE);
+                    //pb.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+
+                }
+            });
+         }
+
         return vista;
-
-//        return inflater.inflate(R.layout.fragment_edit_cliente, container, false);
     }
-
+    private void prepareUI(View vista)
+    {
+        etNombrel = vista.findViewById(R.id.etNombrel);
+        etApellidol  = vista.findViewById(R.id.etApellidol);
+        tvEdad = vista.findViewById(R.id.tvEdad);
+        etTeleFijo = vista.findViewById(R.id.etTeleFijo);
+        etTeleMovil = vista.findViewById(R.id.etTeleMovil);
+        etDireccion = vista.findViewById(R.id.etDireccion);
+        etEmailM = vista.findViewById(R.id.etEmailM);
+        tvcodigo  = vista.findViewById(R.id.tvcodigo);
+        etFecha = vista.findViewById(R.id.etFecha);
+        sp_ciudad  = vista.findViewById(R.id.sp_ciudad);
+        sp_provi  = vista.findViewById(R.id.sp_provi);
+        sp_sexo  = vista.findViewById(R.id.sp_sexo);
+        sp_ocup  = vista.findViewById(R.id.sp_ocup);
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

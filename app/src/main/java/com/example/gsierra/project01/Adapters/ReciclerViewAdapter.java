@@ -1,28 +1,34 @@
 package com.example.gsierra.project01.Adapters;
 
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.R;
-
-
 import com.example.gsierra.project01.entidades.Clientes;
 
 import java.util.List;
 
-public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapter.ViewHolder> {
+public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapter.ViewHolder>
+{
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public List<Clientes> clienteLista;
+    public FragmentManager FM;
+
+       public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView cliente,email,movil,opcion;
         ImageView imagenCantante;
+        private LinearLayout parent;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -31,17 +37,18 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
             movil = (TextView)itemView.findViewById(R.id.tvcelular2);
             opcion = (TextView)itemView.findViewById(R.id.txtOptionDigit);
             imagenCantante  = (ImageView)itemView.findViewById(R.id.imgCliente);
+            parent = (LinearLayout)itemView.findViewById(R.id.parentLayout);
         }
     }
 
-    public List<Clientes> clienteLista;
 
-    public ReciclerViewAdapter(List<Clientes> clienteLista) {
+    public ReciclerViewAdapter(List<Clientes> clienteLista, FragmentManager f_manager) {
         this.clienteLista = clienteLista;
+        this.FM = f_manager;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.cliente.setText(clienteLista.get(position).getApellido() +" " + clienteLista.get(position).getNombre() );
         holder.email.setText(clienteLista.get(position).getEmail());
         holder.movil.setText(clienteLista.get(position).getTelef_movil());
@@ -74,17 +81,30 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
             }
         });
 
-//        holder.cliente.setText(clienteLista.get(position).getApellido());
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),
+                        "Seleccion :" + clienteLista.get(position).getCodigo(),Toast.LENGTH_SHORT).show();
 
+                EditClienteFragment frg = new EditClienteFragment();
+                Bundle parametro = new Bundle();
+                parametro.putInt("pIdCliente",clienteLista.get(position).getCodigo());
+
+                frg.setArguments(parametro);
+                FM.beginTransaction().replace(R.id.content_main,frg).commit();
+            }
+        });
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cliente,parent,false);
-       ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
 
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cliente,parent,false);
 
+        ViewHolder viewHolder = new ViewHolder(view);
+
+       return viewHolder;
     }
 
 

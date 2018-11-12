@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.Helper.Utilidades;
@@ -33,15 +34,10 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class ListaClientesFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private List<Clientes> clientes;
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerClientes;
     ReciclerViewAdapter adaptadorCliente;
@@ -79,8 +75,8 @@ public class ListaClientesFragment extends Fragment {
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                List<Clientes> clientes = (List<Clientes>) response.body();
-                adaptadorCliente = new ReciclerViewAdapter(clientes);
+                 clientes = (List<Clientes>) response.body();
+                adaptadorCliente = new ReciclerViewAdapter(clientes, getFragmentManager());
                 recyclerClientes.setAdapter(adaptadorCliente);
                 recyclerClientes.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.GONE);
@@ -91,6 +87,7 @@ public class ListaClientesFragment extends Fragment {
 
             }
         });
+
         return vista;
     }
 
@@ -117,6 +114,7 @@ public class ListaClientesFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -24,220 +24,347 @@ tools:context=".Fragments.EditClienteFragment"
             android:id="@+id/idClientec"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
-            android:text="Num°"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="Código"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="103dp"
+        <TextView
+            android:id="@+id/tvcodigo"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:enabled="false"
+            android:textColor="@android:color/black"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvNombrec"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Nombre"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <TextView
-            android:id="@+id/tvNombrel"
+        <EditText
+            android:id="@+id/etNombrel"
             android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese nombre"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvApellidoc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Apellido"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <TextView
-            android:id="@+id/tvApellidol"
+        <EditText
+            android:id="@+id/etApellidol"
             android:layout_width="275dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese apellido"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvAedaddc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Edad"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvEdad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:enabled="false"
+            android:textColor="@android:color/black"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvFENNc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Fecha Nac:"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="273dp"
+            android:id="@+id/etFecha"
+            android:layout_width="159dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
             android:ems="10"
-            android:inputType="date" />
+            android:focusable="auto"
+            android:hint="dd/mm/yyyy"
+            android:inputType="date"
+            android:singleLine="true" />
+
 
         <TextView
             android:id="@+id/tvCiudadc"
             android:layout_width="62dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Ciudad"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <Spinner
             android:id="@+id/sp_ciudad"
             android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/Provincias" />
 
         <TextView
             android:id="@+id/tvProvvc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Provincia"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <Spinner
             android:id="@+id/sp_provi"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
-            android:entries="@array/Provincias"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/Provincias" />
 
         <TextView
             android:id="@+id/tvDireccionc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Direccion"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <TextView
-            android:id="@+id/tvDireccion"
+        <EditText
+            android:id="@+id/etDireccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese direccion"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvTelFijoc"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Tel Fijo"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <TextView
-            android:id="@+id/tvTeleFijo"
+        <EditText
+            android:id="@+id/etTeleFijo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese telef. fijo"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvTelMovilc"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Tel Movil"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
-        <TextView
-            android:id="@+id/tvTeleMovil"
+        <EditText
+            android:id="@+id/etTeleMovil"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese celular"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvTelSexoc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Sexo"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <Spinner
             android:id="@+id/sp_sexo"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spinner_background"
             android:entries="@array/Sexo" />
 
         <TextView
             android:id="@+id/tvOcupacionc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Ocupacion"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <Spinner
             android:id="@+id/sp_ocup"
             android:layout_width="275dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spinner_background"
             android:entries="@array/Ocupaciones" />
 
         <TextView
             android:id="@+id/tvEMailc"
             android:layout_width="274dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:text="Email"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tvEmailM"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:fontFamily="sans-serif-condensed" />
+
+        <EditText
+            android:id="@+id/etEmailM"
             android:layout_width="274dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="Ingrese email"
+            android:singleLine="true"
+            app:fontFamily="sans-serif-condensed" />
         <!--</LinearLayout>-->
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnAceptar"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Aceptar"
-            android:visibility="visible" />
+            <Button
+                android:id="@+id/btnAceptar"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@color/colorPrimary"
+                android:text="Aceptar"
+                android:textColor="@android:color/white"
+                android:visibility="visible" />
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="119dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@color/colorPrimary"
+                android:text="Cancelar"
+                android:textColor="@android:color/white" />
 
-        <!--<Button-->
-        <!--android:id="@+id/btnSearch"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:drawableEnd="@android:drawable/ic_menu_search"-->
-        <!--android:text="Buscar" />-->
+            <!--<Button-->
+            <!--android:id="@+id/btnSearch"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableEnd="@android:drawable/ic_menu_search"-->
+            <!--android:text="Buscar" />-->
         </LinearLayout>
     </LinearLayout>
 

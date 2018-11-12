@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ClienteService {
@@ -16,11 +17,11 @@ public interface ClienteService {
     Call<List<Clientes>> getAll();
 
     @GET("Clientes/{id}")
-    Call<Clientes> find(@Query("id") int id);
+    Call<Clientes> find(@Path("id") int id);
 
     @POST("Add")
     Call<Void> create(@Body Clientes cliente);
 
-    @GET("Clientes/{keyword}")
+    @GET("ClientesFilter/{keyword}")
     Call<List<Clientes>> getAllFilter();
 }
