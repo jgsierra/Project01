@@ -5,12 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.Helper.Utilidades;
@@ -19,6 +24,8 @@ import com.example.gsierra.project01.entidades.Clientes;
 import com.example.gsierra.project01.services.APIClient;
 import com.example.gsierra.project01.services.ClienteService;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +39,7 @@ import retrofit2.Response;
  * Use the {@link ListaClientesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListaClientesFragment extends Fragment {
+public class ListaClientesFragment extends Fragment implements  SearchView.OnQueryTextListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -46,6 +53,7 @@ public class ListaClientesFragment extends Fragment {
     RecyclerView recyclerClientes;
     ReciclerViewAdapter adaptadorCliente;
     ProgressBar pb;
+    List<Clientes> clientes;
     public ListaClientesFragment() {
         // Required empty public constructor
     }
@@ -60,7 +68,7 @@ public class ListaClientesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);//Make sure you have this line of code.
     }
 
     @Override
@@ -79,7 +87,7 @@ public class ListaClientesFragment extends Fragment {
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                List<Clientes> clientes = (List<Clientes>) response.body();
+                clientes = (List<Clientes>) response.body();
                 adaptadorCliente = new ReciclerViewAdapter(clientes);
                 recyclerClientes.setAdapter(adaptadorCliente);
                 recyclerClientes.setVisibility(View.VISIBLE);
@@ -118,6 +126,53 @@ public class ListaClientesFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        try {
+            List<Clientes> listafiltrado = filter(clientes,newText);
+            setFilter(listafiltrado);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private List<Clientes> filter(List<Clientes> lclientes,String filtro)
+    {
+        List<Clientes> listaFiltrada = new ArrayList<>();
+        try
+        {
+            filtro = filtro.toLowerCase();
+            for(Clientes cliente: lclientes)
+            {
+                String cliente2=cliente.getNombre().toLowerCase();
+                if(cliente2.contains(filtro))
+                {
+                    listaFiltrada.add(cliente);
+                }
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return  listaFiltrada;
+
+    }
+
+    private void setFilter(List<Clientes> listafiltrada)
+    {
+        this.clientes.clear();
+        this.clientes.addAll(listafiltrada);
+        adaptadorCliente.notifyDataSetChanged();
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -134,4 +189,31 @@ public class ListaClientesFragment extends Fragment {
     }
 
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+
+        inflater.inflate(R.menu.menu_buscador, menu);
+        MenuItem item = menu.findItem(R.id.buscador);
+        SearchView searchView = (SearchView)MenuItemCompat.getActionView(item);
+
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                        setFilter(clientes);
+
+                        return true;
+                    }
+                });
+
+
+    }
 }
