@@ -3,7 +3,6 @@ package com.example.gsierra.project01.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
+//android.widget.SearchView;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.Helper.Utilidades;
@@ -24,7 +24,6 @@ import com.example.gsierra.project01.entidades.Clientes;
 import com.example.gsierra.project01.services.APIClient;
 import com.example.gsierra.project01.services.ClienteService;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -40,6 +39,8 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class ListaClientesFragment extends Fragment implements  SearchView.OnQueryTextListener {
+
+   // public class ListaClientesFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -53,7 +54,8 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     RecyclerView recyclerClientes;
     ReciclerViewAdapter adaptadorCliente;
     ProgressBar pb;
-    List<Clientes> clientes;
+    List<Clientes> listoriginalclientes;
+    ArrayList<Clientes> listcopyclientes = new ArrayList<>() ;
     public ListaClientesFragment() {
         // Required empty public constructor
     }
@@ -87,8 +89,9 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                clientes = (List<Clientes>) response.body();
-                adaptadorCliente = new ReciclerViewAdapter(clientes);
+                listoriginalclientes = (List<Clientes>) response.body();
+                //listcopyclientes.addAll(listoriginalclientes);
+                adaptadorCliente = new ReciclerViewAdapter(listoriginalclientes,getFragmentManager());
                 recyclerClientes.setAdapter(adaptadorCliente);
                 recyclerClientes.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.GONE);
@@ -135,8 +138,10 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     public boolean onQueryTextChange(String newText) {
 
         try {
-            List<Clientes> listafiltrado = filter(clientes,newText);
-            setFilter(listafiltrado);
+            //List<Clientes> listafiltrado = filter(listcopyclientes,newText);
+
+            List<Clientes> listafiltrado = filter(listoriginalclientes,newText);
+            adaptadorCliente.setFilter(listafiltrado);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -167,12 +172,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
 
     }
 
-    private void setFilter(List<Clientes> listafiltrada)
-    {
-        this.clientes.clear();
-        this.clientes.addAll(listafiltrada);
-        adaptadorCliente.notifyDataSetChanged();
-    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -194,26 +194,33 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
 
-        inflater.inflate(R.menu.menu_buscador, menu);
-        MenuItem item = menu.findItem(R.id.buscador);
-        SearchView searchView = (SearchView)MenuItemCompat.getActionView(item);
 
-        searchView.setOnQueryTextListener(this);
+        try {
+            inflater.inflate(R.menu.menu_buscador, menu);
+            MenuItem item = menu.findItem(R.id.buscador);
+            SearchView searchView = (SearchView)MenuItemCompat.getActionView(item);
 
-        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                        return true;
-                    }
+            searchView.setOnQueryTextListener(this);
 
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                        setFilter(clientes);
+            MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+                @Override
+                public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                    return true;
+                }
 
-                        return true;
-                    }
-                });
+                @Override
+                public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                    //adaptadorCliente.setFilter(listcopyclientes);
+                    adaptadorCliente.setFilter(listoriginalclientes);
 
+                    return true;
+                }
+            });
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 }

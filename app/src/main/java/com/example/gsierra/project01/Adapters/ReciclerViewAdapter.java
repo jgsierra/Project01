@@ -17,6 +17,7 @@ import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapter.ViewHolder>
@@ -112,5 +113,13 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
     public int getItemCount() {
         return clienteLista.size();
     }
+
+    public void setFilter(List<Clientes> listafiltrada)
+    {
+        this.clienteLista  = new ArrayList<>();
+        this.clienteLista.addAll(listafiltrada);
+        notifyDataSetChanged();
+    }
+
 }
 
