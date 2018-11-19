@@ -148,7 +148,4 @@ public class BlueFragment extends Fragment {
         }
     }
 
-
-
-
 }

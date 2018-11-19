@@ -93,7 +93,7 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
                 parametro.putInt("pIdCliente",clienteLista.get(position).getCodigo());
 
                 frg.setArguments(parametro);
-                FM.beginTransaction().replace(R.id.content_main,frg).commit();
+                FM.beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
             }
         });
     }

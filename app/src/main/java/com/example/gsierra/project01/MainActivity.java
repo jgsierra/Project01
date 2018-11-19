@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 Fragment miFrag = new EditClienteFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).addToBackStack(null).commit();
 
 
                 //startActivity(new Intent(MainActivity.this,MainEditActivity.class));
@@ -73,14 +74,26 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            salir();
-            //super.onBackPressed();
+        FragmentManager fm = getSupportFragmentManager();
+        if(fm.getBackStackEntryCount()> 0)
+        {
+            getSupportFragmentManager().popBackStack();
         }
+        else if (drawer.isDrawerOpen(GravityCompat.START))
+        {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+          else
+              {
+            salir();
+        }
+
+//        if () {
+//        } else {
+//            salir();
+//            //super.onBackPressed();
+//        }
     }
 
     @Override
@@ -147,7 +160,7 @@ public class MainActivity extends AppCompatActivity
 
         if (fSeleccionado==true)
         {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

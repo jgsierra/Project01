@@ -172,7 +172,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
 
     }
 
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -187,8 +186,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
