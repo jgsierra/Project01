@@ -11,6 +11,11 @@
         android:layout_height="match_parent"
         android:indeterminateDrawable="@drawable/progress" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reciclerCliente"
         android:layout_width="match_parent"
@@ -20,5 +25,5 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:visibility="gone" />
-
+</android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

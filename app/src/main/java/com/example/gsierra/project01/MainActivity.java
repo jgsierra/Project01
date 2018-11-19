@@ -88,12 +88,6 @@ public class MainActivity extends AppCompatActivity
               {
             salir();
         }
-
-//        if () {
-//        } else {
-//            salir();
-//            //super.onBackPressed();
-//        }
     }
 
     @Override

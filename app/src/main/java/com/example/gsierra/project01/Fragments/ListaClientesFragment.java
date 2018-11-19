@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,6 +57,9 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     ProgressBar pb;
     List<Clientes> listoriginalclientes;
     ArrayList<Clientes> listcopyclientes = new ArrayList<>() ;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+
     public ListaClientesFragment() {
         // Required empty public constructor
     }
@@ -82,9 +86,29 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
         recyclerClientes = vista.findViewById(R.id.reciclerCliente);
         recyclerClientes.setLayoutManager(new LinearLayoutManager(getContext()));
         pb = vista.findViewById(R.id.pbar);
+
         //como no estamos en una activity se pone getContext() en lugar de this
 
-            ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
+        cargarDatos();
+
+        swipeRefreshLayout = (SwipeRefreshLayout)vista.findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        //swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorAccent);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                cargarDatos();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        return vista;
+    }
+
+    private  void cargarDatos()
+    {
+        ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
         Call call = clienteService.getAll();
         call.enqueue(new Callback() {
             @Override
@@ -102,7 +126,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
 
             }
         });
-        return vista;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
