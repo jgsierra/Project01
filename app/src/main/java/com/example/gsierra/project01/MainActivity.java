@@ -38,28 +38,32 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final boolean online = Utilidades.isOnline();
-                String resul;
-                if (!online){
-                    resul = "Sin conexion";
-                }
-                else {
-                    resul = "conectado";
-                }
-                Snackbar.make(view,resul, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-
-                Fragment miFrag = new EditClienteFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).addToBackStack(null).commit();
-
-
-                //startActivity(new Intent(MainActivity.this,MainEditActivity.class));
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final boolean online = Utilidades.isOnline();
+//                String resul;
+//                if (!online){
+//                    resul = "Sin conexion";
+//                }
+//                else {
+//                    resul = "conectado";
+//                }
+//                Snackbar.make(view,resul, Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//
+//
+//                EditClienteFragment frg = new EditClienteFragment();
+//                Bundle parametro = new Bundle();
+//                parametro.putInt("pIdCliente",0);
+//                frg.setArguments(parametro);
+//                FragmentManager fm = getSupportFragmentManager();
+//                fm.beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
+//
+//
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

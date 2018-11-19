@@ -1,11 +1,17 @@
 package com.example.gsierra.project01.Fragments;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +26,7 @@ import android.support.v7.widget.SearchView;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.Helper.Utilidades;
+import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
 import com.example.gsierra.project01.services.APIClient;
@@ -58,7 +65,8 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     List<Clientes> listoriginalclientes;
     ArrayList<Clientes> listcopyclientes = new ArrayList<>() ;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private MainActivity mainActivity;
+    private FloatingActionButton fab;
 
     public ListaClientesFragment() {
         // Required empty public constructor
@@ -93,7 +101,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
 
         swipeRefreshLayout = (SwipeRefreshLayout)vista.findViewById(R.id.swipeLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        //swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorAccent);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,6 +110,36 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
             }
         });
 
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.showFloatingActionButton(); //fuerza la visibilidad
+
+        fab = mainActivity.findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_person_add_black_24dp);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final boolean online = Utilidades.isOnline();
+                String resul;
+                if (!online){
+                    resul = "Sin conexion";
+                }
+                else {
+                    resul = "conectado";
+                }
+                Snackbar.make(view,resul, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+
+                EditClienteFragment frg = new EditClienteFragment();
+                Bundle parametro = new Bundle();
+                parametro.putInt("pIdCliente",0);
+                frg.setArguments(parametro);
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
+
+            }
+        });
         return vista;
     }
 
@@ -114,7 +151,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
             @Override
             public void onResponse(Call call, Response response) {
                 listoriginalclientes = (List<Clientes>) response.body();
-                //listcopyclientes.addAll(listoriginalclientes);
                 adaptadorCliente = new ReciclerViewAdapter(listoriginalclientes,getFragmentManager());
                 recyclerClientes.setAdapter(adaptadorCliente);
                 recyclerClientes.setVisibility(View.VISIBLE);
@@ -161,8 +197,6 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     public boolean onQueryTextChange(String newText) {
 
         try {
-            //List<Clientes> listafiltrado = filter(listcopyclientes,newText);
-
             List<Clientes> listafiltrado = filter(listoriginalclientes,newText);
             adaptadorCliente.setFilter(listafiltrado);
         }catch (Exception e)
@@ -211,9 +245,17 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (!getUserVisibleHint()) {
+            return;
+        }
+        fab.setImageResource(R.drawable.ic_person_add_black_24dp);
+        }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-
 
         try {
             inflater.inflate(R.menu.menu_buscador, menu);
@@ -230,8 +272,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
 
                 @Override
                 public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                    //adaptadorCliente.setFilter(listcopyclientes);
-                    adaptadorCliente.setFilter(listoriginalclientes);
+                   adaptadorCliente.setFilter(listoriginalclientes);
 
                     return true;
                 }
@@ -241,6 +282,5 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
         {
             e.printStackTrace();
         }
-
     }
 }

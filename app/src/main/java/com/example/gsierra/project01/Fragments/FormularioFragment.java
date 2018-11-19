@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 
 /**
@@ -105,5 +106,32 @@ public class FormularioFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!getUserVisibleHint()) {
+            return;
+        }
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity != null) {
+
+            mainActivity.hideFloatingActionButton();
+
+//            FloatingActionButton fab = mainActivity.findViewById(R.id.fab);
+//
+//            fab.setImageResource(R.drawable.ic_menu_camera); //Cambiar icono
+//
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    //Toast.makeText("fab action", Toast.LENGTH_SHORT).show();
+//                    Snackbar.make(v,"Fab action", Snackbar.LENGTH_LONG).show();
+//
+//                }
+//            });
+        }
     }
 }

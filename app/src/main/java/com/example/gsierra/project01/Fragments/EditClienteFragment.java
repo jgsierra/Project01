@@ -1,5 +1,6 @@
 package com.example.gsierra.project01.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class EditClienteFragment extends Fragment {
     private TextView tvcodigo,tvEdad;
     private EditText etNombrel,etApellidol,etFecha,etDireccion,etTeleFijo,etTeleMovil,etEmailM;
     private Spinner sp_ciudad,sp_provi,sp_sexo,sp_ocup;
+    private Button btnAceptar,btnCancelar;
     public EditClienteFragment() {
         // Required empty public constructor
     }
@@ -144,6 +147,28 @@ public class EditClienteFragment extends Fragment {
         sp_provi  = vista.findViewById(R.id.sp_provi);
         sp_sexo  = vista.findViewById(R.id.sp_sexo);
         sp_ocup  = vista.findViewById(R.id.sp_ocup);
+
+        btnAceptar = vista.findViewById(R.id.btnAceptar);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getContext(),"Datos guardados exitosamente",Toast.LENGTH_LONG).show();
+                Activity mac = (Activity) getContext();
+                mac.onBackPressed();
+            }
+        });
+
+        btnCancelar = vista.findViewById(R.id.btnCancelar);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity mac = (Activity) getContext();
+               mac.onBackPressed();
+            }
+        });
+
+
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

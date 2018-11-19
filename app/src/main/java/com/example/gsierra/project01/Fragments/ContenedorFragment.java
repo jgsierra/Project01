@@ -40,7 +40,6 @@ public class ContenedorFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static ContenedorFragment newInstance(String param1, String param2) {
         ContenedorFragment fragment = new ContenedorFragment();
         return fragment;
