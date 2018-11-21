@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.gsierra.project01.Fragments.BlueFragment;
+import com.example.gsierra.project01.Fragments.ConfiguracionFragment;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
 import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
@@ -28,7 +29,10 @@ import com.example.gsierra.project01.Fragments.ListaClientesFragment;
 import com.example.gsierra.project01.Helper.Utilidades;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener, GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener, ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,EditClienteFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener,
+        GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener,
+        ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,
+        EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener {
     private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +144,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             miFrag = new ContenedorFragment();
             fSeleccionado = true;
+        }
+        else if (id == R.id.nav_config) {
+            miFrag = new ConfiguracionFragment();
+            fSeleccionado = true;
+
         } else if (id == R.id.nav_send) {
 
             miFrag = new ListaClientesFragment();

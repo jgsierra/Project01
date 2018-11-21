@@ -18,8 +18,13 @@
             android:title="Verde" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_share"
             android:title="Forms" />
+
+        <item android:id="@+id/nav_config"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Configuración"
+            ></item>
     </group>
 
     <item android:title="Servicios">
