@@ -1,6 +1,10 @@
 package com.example.gsierra.project01;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +12,8 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -34,6 +40,9 @@ public class MainActivity extends AppCompatActivity
         ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,
         EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener {
     private FloatingActionButton fab;
+    private PendingIntent pendingIntent;
+    private final static String CHANNEL_ID="NOTIFICACION";
+    private final static int NOTIFICACION_ID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +140,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            CrearNotificacion();
+            fSeleccionado = false;
 
         } else if (id == R.id.nav_gallery) {
             miFrag = new BlueFragment();
@@ -225,4 +236,20 @@ public class MainActivity extends AppCompatActivity
         fab.hide();
     }
 
+    public void CrearNotificacion()
+    {
+        //esto ess para versiones anteriore a android 0
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_person_black_24dp);
+        builder.setContentTitle("Cliente agregado");
+        builder.setContentText("Se han agregado nuevos clientes");
+        //builder.setColor(Color.BLUE);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.MAGENTA,1000,1000);
+        builder.setVibrate(new long[]{1000,1000,2000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID,builder.build());
+    }
 }
