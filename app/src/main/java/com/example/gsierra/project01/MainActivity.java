@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,32 +52,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final boolean online = Utilidades.isOnline();
-//                String resul;
-//                if (!online){
-//                    resul = "Sin conexion";
-//                }
-//                else {
-//                    resul = "conectado";
-//                }
-//                Snackbar.make(view,resul, Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//
-//                EditClienteFragment frg = new EditClienteFragment();
-//                Bundle parametro = new Bundle();
-//                parametro.putInt("pIdCliente",0);
-//                frg.setArguments(parametro);
-//                FragmentManager fm = getSupportFragmentManager();
-//                fm.beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,frg).addToBackStack(null).commit();
-//
-//
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -219,8 +194,12 @@ public class MainActivity extends AppCompatActivity
         final boolean online = Utilidades.isOnline();
 
         if (!online)
-            Snackbar.make(vista,R.string.No_Network_Connection, Snackbar.LENGTH_LONG).show();
+            //Snackbar.make(vista,R.string.No_Network_Connection, Snackbar.LENGTH_LONG).show();
+        {
+            Intent intent = new Intent(this,NoConnectionActivity.class);
+            startActivity(intent);
 
+        }
         else
             Snackbar.make(vista, R.string.Connection, Snackbar.LENGTH_LONG).show();
 
@@ -238,7 +217,7 @@ public class MainActivity extends AppCompatActivity
 
     public void CrearNotificacion()
     {
-        //esto ess para versiones anteriore a android 0
+        //esto ess para versiones anteriore a android o
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_person_black_24dp);
         builder.setContentTitle("Cliente agregado");
@@ -248,8 +227,13 @@ public class MainActivity extends AppCompatActivity
         builder.setLights(Color.MAGENTA,1000,1000);
         builder.setVibrate(new long[]{1000,1000,2000});
         builder.setDefaults(Notification.DEFAULT_SOUND);
+        PendingIntent pendingIntent2 = PendingIntent.getActivity(this, 0,
+                new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent2);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID,builder.build());
+
+
     }
 }
