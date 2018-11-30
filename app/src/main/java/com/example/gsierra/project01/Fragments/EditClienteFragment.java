@@ -10,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,11 +21,13 @@ import android.widget.Toast;
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
+import com.example.gsierra.project01.entidades.Provincias;
 import com.example.gsierra.project01.services.APIClient;
 import com.example.gsierra.project01.services.ClienteService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -111,7 +115,7 @@ public class EditClienteFragment extends Fragment {
                         }
                         etFecha.setText(cliente.getFecha_Nac());
 //                    sp_ciudad
-//                    sp_provi
+                      sp_provi.setSelection(Integer.parseInt(cliente.getProvincia()));
 //                    sp_sexo
 //                    sp_ocup
                     }
@@ -144,7 +148,18 @@ public class EditClienteFragment extends Fragment {
         tvcodigo  = vista.findViewById(R.id.tvcodigo);
         etFecha = vista.findViewById(R.id.etFecha);
         sp_ciudad  = vista.findViewById(R.id.sp_ciudad);
-        sp_provi  = vista.findViewById(R.id.sp_provi);
+        sp_provi  = (Spinner)vista.findViewById(R.id.sp_provi);
+        sp_provi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         sp_sexo  = vista.findViewById(R.id.sp_sexo);
         sp_ocup  = vista.findViewById(R.id.sp_ocup);
 
@@ -153,6 +168,9 @@ public class EditClienteFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                Provincias provincia = (Provincias)sp_provi.getSelectedItem();
+                int idProvincia  = provincia.getId_provincia();
+                String nombre = provincia.toString();
                 Toast.makeText(getContext(),"Datos guardados exitosamente",Toast.LENGTH_LONG).show();
                 Activity mac = (Activity) getContext();
                 mac.onBackPressed();
@@ -168,7 +186,16 @@ public class EditClienteFragment extends Fragment {
             }
         });
 
+        CargarSpinnerss();
+    }
 
+    public void CargarSpinnerss()
+    {
+        ArrayList<Provincias> listap = (ArrayList)new Provincias().getProvincias();
+
+        ArrayAdapter<Provincias> adapter = new ArrayAdapter<Provincias>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item,listap);
+        sp_provi.setAdapter(adapter);
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

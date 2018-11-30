@@ -231,8 +231,10 @@ public class MainActivity extends AppCompatActivity
                 new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent2);
 
+        builder.setAutoCancel(true);//al clickear la notificacion se borra el icono
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(NOTIFICACION_ID,builder.build());
+
+                notificationManagerCompat.notify(NOTIFICACION_ID,builder.build());
 
 
     }
