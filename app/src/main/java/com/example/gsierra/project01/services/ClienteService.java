@@ -19,7 +19,7 @@ public interface ClienteService {
     @GET("Clientes/{id}")
     Call<Clientes> find(@Path("id") int id);
 
-    @POST("Add")
+    @POST("PostClientes")
     Call<Void> create(@Body Clientes cliente);
 
     @GET("ClientesFilter/{keyword}")

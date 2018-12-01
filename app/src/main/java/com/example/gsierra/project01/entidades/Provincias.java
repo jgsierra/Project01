@@ -63,4 +63,17 @@ public class Provincias {
         return list;
     }
 
+    public List<Provincias> getCiudades()
+    {
+        List<Provincias> list = new ArrayList<>();
+
+        list.add(new Provincias(1,"CAPITAL FEDERAL"));
+        list.add(new Provincias(2,"SAN MARTIN"));
+        list.add(new Provincias(3,"CASEROS"));
+        list.add(new Provincias(4,"MORENO"));
+        list.add(new Provincias(5,"VICENTE LOPEZ"));
+        list.add(new Provincias(6,"SAN MIGUEL"));
+
+        return list;
+    }
 }

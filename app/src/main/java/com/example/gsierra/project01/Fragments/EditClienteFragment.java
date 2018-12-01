@@ -3,6 +3,7 @@ package com.example.gsierra.project01.Fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +26,9 @@ import com.example.gsierra.project01.entidades.Provincias;
 import com.example.gsierra.project01.services.APIClient;
 import com.example.gsierra.project01.services.ClienteService;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -147,12 +151,17 @@ public class EditClienteFragment extends Fragment {
         etEmailM = vista.findViewById(R.id.etEmailM);
         tvcodigo  = vista.findViewById(R.id.tvcodigo);
         etFecha = vista.findViewById(R.id.etFecha);
-        sp_ciudad  = vista.findViewById(R.id.sp_ciudad);
+        sp_ciudad  = (Spinner)vista.findViewById(R.id.sp_ciudad);
         sp_provi  = (Spinner)vista.findViewById(R.id.sp_provi);
         sp_provi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                Provincias provincia = (Provincias)sp_provi.getSelectedItem();
+                int idProvincia  = provincia.getId_provincia();
+                String nombre = provincia.toString();
+
+                new loadSpinnerTask().execute(idProvincia);
             }
 
             @Override
@@ -167,13 +176,7 @@ public class EditClienteFragment extends Fragment {
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Provincias provincia = (Provincias)sp_provi.getSelectedItem();
-                int idProvincia  = provincia.getId_provincia();
-                String nombre = provincia.toString();
-                Toast.makeText(getContext(),"Datos guardados exitosamente",Toast.LENGTH_LONG).show();
-                Activity mac = (Activity) getContext();
-                mac.onBackPressed();
+                saveDatos();
             }
         });
 
@@ -235,4 +238,78 @@ public class EditClienteFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-}
+
+
+    private  void saveDatos()
+    {
+        ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
+        Clientes cliente = new Clientes();
+        cliente.setNombre(etNombrel.getText().toString());
+        cliente.setApellido(etApellidol.getText().toString());
+        //cliente.setEdad(Integer.parseInt(tvEdad.toString()));
+        cliente.setEdad(44);
+        cliente.setFecha_Nac("10-05-1987");
+        Provincias c = (Provincias)sp_ciudad.getSelectedItem();
+        cliente.setCiudad(c.toString());
+        Provincias p = (Provincias)sp_provi.getSelectedItem();
+        cliente.setProvincia(String.valueOf(p.getId_provincia()));
+        cliente.setDireccion(etDireccion.getText().toString());
+        cliente.setTelef_fijo(etTeleFijo.getText().toString());
+        cliente.setTelef_movil(etTeleMovil.getText().toString());
+        cliente.setSexo("F");
+        cliente.setOcupacion("Sin empleo");
+        cliente.setEmail(etEmailM.getText().toString());
+
+        Call call = clienteService.create(cliente);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+                Toast.makeText(getContext(),response.message()+" code - "+ String.valueOf(response.code()),Toast.LENGTH_LONG).show();
+                Activity mac = (Activity) getContext();
+                mac.onBackPressed();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+    }
+
+    public class loadSpinnerTask extends AsyncTask<Integer, Integer, ArrayAdapter<Provincias>> {
+        @Override
+        protected ArrayAdapter<Provincias> doInBackground(Integer... integers) {
+            try{
+                ArrayList<Provincias> listaC = (ArrayList)new Provincias().getCiudades();
+
+                ArrayAdapter<Provincias> adapter = new ArrayAdapter<Provincias>(getContext(),
+
+
+                        R.layout.support_simple_spinner_dropdown_item,listaC);
+
+                return adapter;
+            } catch (Exception e){
+                e.printStackTrace();
+                return  null;
+
+            }
+
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress){
+
+        }
+
+
+        @Override
+        protected void onPostExecute(ArrayAdapter<Provincias> result){
+            super.onPostExecute(result);
+            sp_ciudad.setAdapter(result);
+
+        }
+    }
+
+    }
