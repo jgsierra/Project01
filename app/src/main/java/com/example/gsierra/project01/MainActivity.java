@@ -25,10 +25,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.gsierra.project01.Fragments.BlueFragment;
 import com.example.gsierra.project01.Fragments.ConfiguracionFragment;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
+import com.example.gsierra.project01.Fragments.DatosPersonalesFragment;
 import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
 import com.example.gsierra.project01.Fragments.GreenFragment;
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener,
         GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener,
         ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,
-        EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener {
+        EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener,
+        DatosPersonalesFragment.OnFragmentInteractionListener{
     private FloatingActionButton fab;
     private PendingIntent pendingIntent;
     private final static String CHANNEL_ID="NOTIFICACION";
@@ -61,6 +64,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imUser = (ImageView)headerView.findViewById(R.id.ivUser);
+
+        imUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment miFrag = new DatosPersonalesFragment();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).addToBackStack(null).commit();
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
     }
 
     @Override
@@ -149,7 +169,11 @@ public class MainActivity extends AppCompatActivity
         salir();
 
         fSeleccionado = false;
+        } else if (id == R.id.ivUser){
+            miFrag = new DatosPersonalesFragment();
+            fSeleccionado = true;
         }
+
 
         if (fSeleccionado==true)
         {

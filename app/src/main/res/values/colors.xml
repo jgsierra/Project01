@@ -6,4 +6,5 @@
     <color name="colorIndigo">#e6f2fa</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorDarkGrey">#9e9e9e</color>
-</resources>
+    <color name="colorBotones">#659ef9</color>
+    </resources>

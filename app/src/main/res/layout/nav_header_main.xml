@@ -7,28 +7,29 @@
     android:gravity="bottom"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="30dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="3dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="66dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="1dp"
+        android:id="@+id/ivUser"
+        android:layout_width="71dp"
+        android:layout_height="65dp"
+        android:background="@drawable/edit_text_background"
         android:contentDescription="@string/nav_header_desc"
         app:srcCompat="@drawable/edit_person" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="77dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingLeft="@dimen/nav_header_lados_spacing"
+            android:paddingRight="@dimen/nav_header_lados_spacing"
             android:text="@string/nav_header_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -36,7 +37,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingLeft="@dimen/nav_header_lados_spacing"
+            android:paddingRight="@dimen/nav_header_lados_spacing"
             android:text="@string/nav_header_subtitle"
             android:textColor="@color/colorWhite"
             android:textSize="12sp" />

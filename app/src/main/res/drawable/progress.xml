@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:pivotX="50%" android:pivotY="50%" android:fromDegrees="0" android:toDegrees="360">
-    <shape android:shape="ring" android:innerRadiusRatio="9"
-        android:thicknessRatio="30" android:useLevel="false">
-        <size android:width="76dip" android:height="76dip" />
+    <shape android:shape="ring" android:innerRadiusRatio="20"
+        android:thicknessRatio="120" android:useLevel="false">
+        <size android:width="200dip" android:height="200dip" />
         <gradient android:type="sweep" android:useLevel="false"
             android:startColor="#7d91f5"
             android:endColor="#00ffffff"

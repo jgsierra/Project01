@@ -344,7 +344,7 @@ tools:context=".Fragments.EditClienteFragment"
                 android:layout_width="119dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/bordes_botones"
                 android:text="Aceptar"
                 android:textColor="@android:color/white"
                 android:visibility="visible" />
@@ -354,7 +354,7 @@ tools:context=".Fragments.EditClienteFragment"
                 android:layout_width="119dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/bordes_botones"
                 android:text="Cancelar"
                 android:textColor="@android:color/white" />
 
