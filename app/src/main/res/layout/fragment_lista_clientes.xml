@@ -11,6 +11,13 @@
         android:layout_height="match_parent"
         android:indeterminateDrawable="@drawable/progress" />
 
+    <TextView
+        android:id="@+id/tvCargando"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Cargando..." />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"

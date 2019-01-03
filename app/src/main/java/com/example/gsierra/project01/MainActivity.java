@@ -1,7 +1,6 @@
 package com.example.gsierra.project01;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
@@ -32,6 +30,7 @@ import com.example.gsierra.project01.Fragments.ConfiguracionFragment;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
 import com.example.gsierra.project01.Fragments.DatosPersonalesFragment;
 import com.example.gsierra.project01.Fragments.EditClienteFragment;
+import com.example.gsierra.project01.Fragments.EstatusFragment;
 import com.example.gsierra.project01.Fragments.FormularioFragment;
 import com.example.gsierra.project01.Fragments.GreenFragment;
 import com.example.gsierra.project01.Fragments.ListaClientesFragment;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener,
         ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,
         EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener,
-        DatosPersonalesFragment.OnFragmentInteractionListener{
+        DatosPersonalesFragment.OnFragmentInteractionListener,EstatusFragment.OnFragmentInteractionListener{
     private FloatingActionButton fab;
     private PendingIntent pendingIntent;
     private final static String CHANNEL_ID="NOTIFICACION";
@@ -53,6 +52,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //inicio coneste fragment
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.content_main,new EstatusFragment()).addToBackStack(null).commit();
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -88,9 +92,18 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         FragmentManager fm = getSupportFragmentManager();
-        if(fm.getBackStackEntryCount()> 0)
+        Fragment currentFragment = fm.findFragmentById(R.id.content_main);
+        if (currentFragment instanceof EstatusFragment)
         {
-            getSupportFragmentManager().popBackStack();
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        }
+        else if(fm.getBackStackEntryCount()> 0)
+        {
+            fm.beginTransaction().replace(R.id.content_main,new EstatusFragment()).commit();
+
+            //getSupportFragmentManager().popBackStack();
         }
         else if (drawer.isDrawerOpen(GravityCompat.START))
         {
@@ -140,19 +153,24 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
             miFrag = new BlueFragment();
+            getSupportActionBar().setTitle("Azul");
             fSeleccionado = true;
         } else if (id == R.id.nav_slideshow) {
             miFrag = new GreenFragment();
+            getSupportActionBar().setTitle("Verde");
             fSeleccionado = true;
         } else if (id == R.id.nav_manage) {
             miFrag = new FormularioFragment();
+            getSupportActionBar().setTitle("Formulario");
             fSeleccionado = true;
         } else if (id == R.id.nav_share) {
             miFrag = new ContenedorFragment();
+            getSupportActionBar().setTitle("Pestañas");
             fSeleccionado = true;
         }
         else if (id == R.id.nav_config) {
             miFrag = new ConfiguracionFragment();
+            getSupportActionBar().setTitle("Configuraciones");
             fSeleccionado = true;
 
         } else if (id == R.id.nav_send) {
@@ -160,7 +178,10 @@ public class MainActivity extends AppCompatActivity
             miFrag = new ListaClientesFragment();
 
             if (showSnackIfOffline(findViewById(R.id.content_main)))
-            {fSeleccionado = true;}
+            {
+                fSeleccionado = true;
+                getSupportActionBar().setTitle("Clientes");
+            }
             else
             { fSeleccionado = false; }
 
@@ -171,6 +192,8 @@ public class MainActivity extends AppCompatActivity
         fSeleccionado = false;
         } else if (id == R.id.ivUser){
             miFrag = new DatosPersonalesFragment();
+            getSupportActionBar().setTitle("Datos Personales");
+
             fSeleccionado = true;
         }
 
@@ -178,6 +201,8 @@ public class MainActivity extends AppCompatActivity
         if (fSeleccionado==true)
         {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFrag).addToBackStack(null).commit();
+            item.setChecked(true);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

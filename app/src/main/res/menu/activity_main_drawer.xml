@@ -47,5 +47,5 @@
     <item
         android:id="@+id/versionApp"
         android:layout_height="wrap_content"
-        android:title="@string/VersioApp" />
+        android:title="@string/VersioApp"  />
 </menu>

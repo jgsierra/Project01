@@ -41,6 +41,13 @@
         <item>Masculino</item>
         <item>Femenino</item>
     </string-array>
+    <string-array name="tipoIdentificacion">
+        <item>Pasaporte</item>
+        <item>Libreta Civica</item>
+        <item>Cédula de Identidad</item>
+        <item>Libreta de Enrolamiento</item>
+        <item>D.N.I</item>
+    </string-array>
     <string-array name="Ocupaciones">
         <item>Programador</item>
         <item>Albañil</item>

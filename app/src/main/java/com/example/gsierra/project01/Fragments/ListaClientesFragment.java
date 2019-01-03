@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
+import android.widget.TextView;
 //android.widget.SearchView;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
@@ -67,7 +68,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
     private SwipeRefreshLayout swipeRefreshLayout;
     private MainActivity mainActivity;
     private FloatingActionButton fab;
-
+    TextView tvCargando;
     public ListaClientesFragment() {
         // Required empty public constructor
     }
@@ -94,7 +95,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
         recyclerClientes = vista.findViewById(R.id.reciclerCliente);
         recyclerClientes.setLayoutManager(new LinearLayoutManager(getContext()));
         pb = vista.findViewById(R.id.pbar);
-
+        tvCargando = vista.findViewById(R.id.tvCargando);
         //como no estamos en una activity se pone getContext() en lugar de this
 
         cargarDatos();
@@ -155,6 +156,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
                 recyclerClientes.setAdapter(adaptadorCliente);
                 recyclerClientes.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.GONE);
+                tvCargando.setVisibility(View.GONE);
             }
 
             @Override

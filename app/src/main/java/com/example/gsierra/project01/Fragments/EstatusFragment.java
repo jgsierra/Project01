@@ -3,8 +3,6 @@ package com.example.gsierra.project01.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +11,16 @@ import android.view.ViewGroup;
 import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GreenFragment.OnFragmentInteractionListener} interface
+ * {@link EstatusFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GreenFragment#newInstance} factory method to
+ * Use the {@link EstatusFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GreenFragment extends Fragment {
+public class EstatusFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +32,7 @@ public class GreenFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public GreenFragment() {
+    public EstatusFragment() {
         // Required empty public constructor
     }
 
@@ -43,18 +42,32 @@ public class GreenFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GreenFragment.
+     * @return A new instance of fragment EstatusFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GreenFragment newInstance(String param1, String param2) {
-        GreenFragment fragment = new GreenFragment();
+    public static EstatusFragment newInstance(String param1, String param2) {
+        EstatusFragment fragment = new EstatusFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!getUserVisibleHint()) {
+            return;
+        }
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity != null) {
+
+            mainActivity.hideFloatingActionButton();
+
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +81,7 @@ public class GreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_green, container, false);
+        return inflater.inflate(R.layout.fragment_estatus, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,23 +122,4 @@ public class GreenFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!getUserVisibleHint()) {
-            return;
-        }
-
-        MainActivity mainActivity = (MainActivity) getActivity();
-
-        if (mainActivity != null) {
-
-            mainActivity.hideFloatingActionButton();
-
-
-        }
-    }
-
 }

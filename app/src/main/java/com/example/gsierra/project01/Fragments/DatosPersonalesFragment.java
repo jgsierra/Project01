@@ -144,7 +144,9 @@ public class DatosPersonalesFragment extends Fragment {
         if (mainActivity != null) {
 
             mainActivity.hideFloatingActionButton();
-
+//            mainActivity.getSupportActionBar().setTitle("Datos Personales");
+            mainActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+//            mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
     /**
@@ -237,8 +239,6 @@ public class DatosPersonalesFragment extends Fragment {
                     break;
             }
         }
-
-
-
     }
+
 }
