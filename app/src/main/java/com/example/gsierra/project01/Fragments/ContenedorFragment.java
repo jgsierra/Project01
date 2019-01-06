@@ -163,6 +163,7 @@ public class ContenedorFragment extends Fragment {
         if (mainActivity != null) {
 
             mainActivity.hideFloatingActionButton();
+            mainActivity.getSupportActionBar().show();
 
         }
     }

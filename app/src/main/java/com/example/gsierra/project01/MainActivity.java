@@ -23,10 +23,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.example.gsierra.project01.Fragments.BlueFragment;
-import com.example.gsierra.project01.Fragments.ConfiguracionFragment;
+import com.example.gsierra.project01.Fragments.ConfiguracionActivity;
 import com.example.gsierra.project01.Fragments.ContenedorFragment;
 import com.example.gsierra.project01.Fragments.DatosPersonalesFragment;
 import com.example.gsierra.project01.Fragments.EditClienteFragment;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BlueFragment.OnFragmentInteractionListener,
         GreenFragment.OnFragmentInteractionListener,FormularioFragment.OnFragmentInteractionListener,
         ContenedorFragment.OnFragmentInteractionListener,ListaClientesFragment.OnFragmentInteractionListener,
-        EditClienteFragment.OnFragmentInteractionListener,ConfiguracionFragment.OnFragmentInteractionListener,
+        EditClienteFragment.OnFragmentInteractionListener,
         DatosPersonalesFragment.OnFragmentInteractionListener,EstatusFragment.OnFragmentInteractionListener{
     private FloatingActionButton fab;
     private PendingIntent pendingIntent;
@@ -97,6 +98,17 @@ public class MainActivity extends AppCompatActivity
         {
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
+            }
+        }
+        else if (currentFragment instanceof FormularioFragment) {
+            View vista = currentFragment.getView();
+            WebView webView = vista.findViewById(R.id.wbUfopolis);
+            if (webView.canGoBack()) {
+                webView.goBack();
+            } else
+            {
+                fm.beginTransaction().replace(R.id.content_main,new EstatusFragment()).commit();
+
             }
         }
         else if(fm.getBackStackEntryCount()> 0)
@@ -161,7 +173,7 @@ public class MainActivity extends AppCompatActivity
             fSeleccionado = true;
         } else if (id == R.id.nav_manage) {
             miFrag = new FormularioFragment();
-            getSupportActionBar().setTitle("Formulario");
+            getSupportActionBar().setTitle("Web");
             fSeleccionado = true;
         } else if (id == R.id.nav_share) {
             miFrag = new ContenedorFragment();
@@ -169,9 +181,10 @@ public class MainActivity extends AppCompatActivity
             fSeleccionado = true;
         }
         else if (id == R.id.nav_config) {
-            miFrag = new ConfiguracionFragment();
-            getSupportActionBar().setTitle("Configuraciones");
-            fSeleccionado = true;
+            //miFrag = new ConfiguracionActivity();
+            startActivity(new Intent(MainActivity.this,ConfiguracionActivity.class));
+           /// getSupportActionBar().setTitle("Configuraciones");
+            fSeleccionado = false;
 
         } else if (id == R.id.nav_send) {
 

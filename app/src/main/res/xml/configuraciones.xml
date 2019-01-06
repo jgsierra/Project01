@@ -1,4 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory
+        android:key="user_category"
+        android:title="Modificar Usuario - Contraseña">
+        <EditTextPreference
+            android:dialogTitle="Usuario"
+            android:dialogMessage="Ingresa tu nombre"
+            android:inputType="textCapWords"
+            android:key="key_full_usuario"
+            android:title="Nombre"
+            android:summary="Juan Perez">
+        </EditTextPreference>
+
+        <EditTextPreference
+            android:dialogTitle="Contraseña"
+            android:dialogMessage="Ingresa tu contraeña"
+            android:inputType="textPassword"
+            android:key="key_password"
+            android:title="Contraseña"
+            android:summary="******">
+        </EditTextPreference>
+        <EditTextPreference
+            android:dialogTitle="Usuario"
+            android:dialogMessage="Ingresa tu nombre"
+            android:inputType="textCapWords"
+            android:key="key_full_usuario"
+            android:title="Nombre"
+            android:summary="Juan Perez">
+        </EditTextPreference>
+
+        <EditTextPreference
+            android:dialogTitle="Email"
+            android:dialogMessage="Ingresa tu email"
+            android:inputType="textEmailAddress"
+            android:key="key_email"
+            android:title="Email"
+            android:summary="gsierra@gmail.net">
+        </EditTextPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Notificaciones">
+
+        <CheckBoxPreference
+           android:defaultValue="true"
+            android:key="key_enable_notification"
+            android:title="Habilitar las notificaciones"
+            android:summary="On or Off notificaciones push de la app"/>
+        <ListPreference
+            android:dependency="key_enable_notification"
+            android:key="key_enable_notif"
+            android:title="Notificacion Push Timer"
+            android:summary="Se reciben notificaciones cada cierto tiempo"
+            android:entries="@array/timerList"
+            android:entryValues="@array/timerListValores"
+            />
+
+        <MultiSelectListPreference
+            android:dialogTitle="Selecciona servicios notificados"
+            android:key="key_tipo_servicio"
+            android:title="Tipos Servicios"
+            android:summary="Presiona para elejir"
+            android:entries="@array/tiposServicios"
+            android:entryValues="@array/tiposServiciosValores"/>
+
+        <SwitchPreference
+            android:key="enable_notificacion_push"
+            android:editable="true"
+            android:title="Notificaciones Push"/>
+       <RingtonePreference
+           android:key="key_notification_ringtone"
+           android:title="Notificacion Ringtone"
+           android:summary="Eleji el sonido de notificación"
+           android:ringtoneType="notification"
+           android:dependency="enable_notificacion_push" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_alarmas"
+        android:title="Alarmas">
+
+        <SwitchPreference
+            android:key="enable_alarmas"
+            android:editable="false"
+            android:title="Setear alarmas"/>
+
+        <RingtonePreference
+            android:key="key_sonidos_alarmas"
+            android:title="Sonidos de alarmas"
+            android:summary="Eleji el sonido de alarmas"
+            android:ringtoneType="alarm"
+            android:dependency="enable_alarmas" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

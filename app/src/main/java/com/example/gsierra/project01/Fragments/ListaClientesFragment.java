@@ -253,7 +253,15 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
             return;
         }
         fab.setImageResource(R.drawable.ic_person_add_black_24dp);
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity != null) {
+
+            mainActivity.getSupportActionBar().show();
+
         }
+        }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

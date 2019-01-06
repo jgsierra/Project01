@@ -123,6 +123,7 @@ public class GreenFragment extends Fragment {
         if (mainActivity != null) {
 
             mainActivity.hideFloatingActionButton();
+            mainActivity.getSupportActionBar().show();
 
 
         }

@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.FormularioFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/form_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</FrameLayout>
+
+        <EditText
+            android:id="@+id/tvBuscarIntenet"
+            android:layout_width="257dp"
+            android:layout_height="42dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_background"
+            android:focusable="auto"
+            android:hint="http://www.google.com"
+            android:inputType="textFilter"
+            android:paddingLeft="4dp"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif-condensed" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:drawable/ic_menu_search" />
+
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/wbUfopolis"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

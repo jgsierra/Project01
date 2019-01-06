@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.hardware.camera2.CameraAccessException;
 import android.media.MediaScannerConnection;
@@ -18,7 +19,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gsierra.project01.MainActivity;
@@ -50,7 +53,8 @@ public class DatosPersonalesFragment extends Fragment {
 
     File fileImagen;
     Bitmap bitmap;
-
+    EditText etNombre;
+    TextView tvNombre;
     private static final int COD_SELECCIONADO=10;
     private static final int COD_FOTO=20;
 
@@ -99,6 +103,15 @@ public class DatosPersonalesFragment extends Fragment {
 
         final View vista = inflater.inflate(R.layout.fragment_datos_personales, container, false);
         ivUser = vista.findViewById(R.id.imageView3);
+        etNombre = vista.findViewById(R.id.etNombrel);
+        tvNombre = vista.findViewById(R.id.tvNombrec);
+        etNombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tvNombre.setTextColor(Color.RED);
+            }
+        });
         ivUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +160,8 @@ public class DatosPersonalesFragment extends Fragment {
 //            mainActivity.getSupportActionBar().setTitle("Datos Personales");
             mainActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 //            mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mainActivity.getSupportActionBar().show();
+
         }
     }
     /**

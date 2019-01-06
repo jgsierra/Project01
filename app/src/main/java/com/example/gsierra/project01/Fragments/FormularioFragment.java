@@ -1,5 +1,6 @@
 package com.example.gsierra.project01.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,7 +8,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.example.gsierra.project01.Helper.MyWebViewClient;
 import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 
@@ -24,7 +33,11 @@ public class FormularioFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private WebView webView;
+    ProgressDialog dialog = null;
+    private TextView tvBuscar;
+    private ImageButton imgBtn;
+    private Button btnSearch;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -66,7 +79,40 @@ public class FormularioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_formulario, container, false);
+        final View vista = inflater.inflate(R.layout.fragment_formulario, container, false);
+        dialog = ProgressDialog.show(getContext(),"","Cargado...",true);
+        //imgBtn = (ImageButton)vista.findViewById(R.id.imgBtn);
+        btnSearch = (Button)vista.findViewById(R.id.btnSearch);
+        webView = vista.findViewById(R.id.wbUfopolis);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                dialog.dismiss();
+            }
+        });
+        webView.loadUrl("http://www.infobae.com");
+
+        tvBuscar = (TextView)vista.findViewById(R.id.tvBuscarIntenet);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = tvBuscar.getText().toString();
+                WebSettings webSettings = webView.getSettings();
+                webSettings.setJavaScriptEnabled(true);
+                webView.setWebViewClient(new MyWebViewClient(){
+                    @Override
+                    public void onPageFinished(WebView view, String url) {
+                        dialog.dismiss();
+                    }
+                });
+                webView.loadUrl(url);
+
+            }
+        });
+
+        return vista;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -119,19 +165,10 @@ public class FormularioFragment extends Fragment {
         if (mainActivity != null) {
 
             mainActivity.hideFloatingActionButton();
+            mainActivity.getSupportActionBar().hide();
 
-//            FloatingActionButton fab = mainActivity.findViewById(R.id.fab);
-//
-//            fab.setImageResource(R.drawable.ic_menu_camera); //Cambiar icono
-//
-//            fab.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //Toast.makeText("fab action", Toast.LENGTH_SHORT).show();
-//                    Snackbar.make(v,"Fab action", Snackbar.LENGTH_LONG).show();
-//
-//                }
-//            });
         }
     }
+
+
 }

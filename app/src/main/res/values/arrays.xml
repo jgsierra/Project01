@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="timerList">
+        <item>Cada 5 minutos</item>
+        <item>Cada 15 minutos</item>
+        <item>Cada 30 minutos</item>
+        <item>Cada 60 minutos</item>
+    </string-array>
+    <string-array name="timerListValores">
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="tiposServicios">
+    <item>Clientes</item>
+    <item>Turnos</item>
+    <item>Cumpleaños</item>
+    <item>Ventas</item>
+    <item>Proveedores</item>
+</string-array>
+    <string-array name="tiposServiciosValores">
+        <item>Clientes</item>
+        <item>Turnos</item>
+        <item>Cumpleaños</item>
+        <item>Ventas</item>
+        <item>Proveedores</item>
+    </string-array>
+</resources>

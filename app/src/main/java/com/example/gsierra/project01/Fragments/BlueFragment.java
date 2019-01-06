@@ -145,6 +145,8 @@ public class BlueFragment extends Fragment {
 
                 }
             });
+            mainActivity.getSupportActionBar().show();
+
         }
     }
 

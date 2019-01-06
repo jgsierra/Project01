@@ -16,9 +16,18 @@ import android.widget.Toast;
 import com.example.gsierra.project01.Fragments.EditClienteFragment;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
+import com.example.gsierra.project01.services.APIClient;
+import com.example.gsierra.project01.services.ClienteService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapter.ViewHolder>
 {
@@ -71,7 +80,12 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
                                 break;
                             case R.id.mnu_item_delete:
                                 notifyDataSetChanged();
-                                Toast.makeText(v.getContext(),"deleted", Toast.LENGTH_SHORT).show();
+                                Integer codCliente = clienteLista.get(position).getCodigo();
+
+                                BorrarCliente(v,codCliente);
+
+
+                                //Toast.makeText(v.getContext(),"deleted", Toast.LENGTH_SHORT).show();
                                 break;
                             default:
                                 break;
@@ -85,8 +99,8 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                        "Seleccion :" + clienteLista.get(position).getCodigo(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(v.getContext(),
+//                        "Seleccion :" + clienteLista.get(position).getCodigo(),Toast.LENGTH_SHORT).show();
 
                 EditClienteFragment frg = new EditClienteFragment();
                 Bundle parametro = new Bundle();
@@ -119,6 +133,26 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
         this.clienteLista  = new ArrayList<>();
         this.clienteLista.addAll(listafiltrada);
         notifyDataSetChanged();
+    }
+
+    public  void BorrarCliente(View v,int idCliente)
+    {
+        final View vista = v;
+        ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
+        Call call = clienteService.delete(idCliente);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+                Toast.makeText(vista.getContext(),response.message()+" code - "+ String.valueOf(response.code()),Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 
 }

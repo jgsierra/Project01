@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gsierra.project01.Adapters.ReciclerViewAdapter;
+import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
 import com.example.gsierra.project01.entidades.Clientes;
 import com.example.gsierra.project01.entidades.Provincias;
@@ -308,6 +309,22 @@ public class EditClienteFragment extends Fragment {
         protected void onPostExecute(ArrayAdapter<Provincias> result){
             super.onPostExecute(result);
             sp_ciudad.setAdapter(result);
+
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!getUserVisibleHint()) {
+            return;
+        }
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        if (mainActivity != null) {
+
+//            mainActivity.hideFloatingActionButton();
+            mainActivity.getSupportActionBar().show();
 
         }
     }
