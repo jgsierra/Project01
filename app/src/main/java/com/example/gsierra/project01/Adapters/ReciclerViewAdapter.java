@@ -1,7 +1,9 @@
 package com.example.gsierra.project01.Adapters;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -82,10 +84,7 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
                                 notifyDataSetChanged();
                                 Integer codCliente = clienteLista.get(position).getCodigo();
 
-                                BorrarCliente(v,codCliente);
-
-
-                                //Toast.makeText(v.getContext(),"deleted", Toast.LENGTH_SHORT).show();
+                                Confirmar(v,codCliente);
                                 break;
                             default:
                                 break;
@@ -133,6 +132,33 @@ public class ReciclerViewAdapter extends RecyclerView.Adapter<ReciclerViewAdapte
         this.clienteLista  = new ArrayList<>();
         this.clienteLista.addAll(listafiltrada);
         notifyDataSetChanged();
+    }
+
+
+    private void Confirmar(View v, int CodCliente) {
+        final View vista = v;
+        final int idcliente = CodCliente;
+           AlertDialog.Builder builder =
+                new AlertDialog.Builder(vista.getContext(), R.style.MyDialogTheme);
+
+        builder.setTitle("Eliminar el cliente n° " + String.valueOf(idcliente));
+        builder.setMessage("¿Confirmas la operación?");
+
+        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                BorrarCliente(vista,idcliente);}
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     public  void BorrarCliente(View v,int idCliente)

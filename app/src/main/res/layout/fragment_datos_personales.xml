@@ -187,34 +187,23 @@
                 android:textSize="14sp"
                 app:fontFamily="sans-serif-condensed" />
 
-            <EditText
-                android:id="@+id/etFecha"
-                android:layout_width="159dp"
-                android:layout_height="wrap_content"
+
+            <!--android:entries="@array/Provincias" />-->
+
+            <!--android:entries="@array/Provincias" />-->
+
+            <TextView
+                android:id="@+id/etFechaPicker"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:focusable="auto"
-                android:hint="dd/mm/yyyy"
-                android:inputType="date"
-                android:singleLine="true" />
-
-
-            <!--android:entries="@array/Provincias" />-->
-
-            <!--android:entries="@array/Provincias" />-->
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:inputType="date" />
+                android:text="dd/mm/aaaa"
+                android:textSize="18sp"
+                app:fontFamily="sans-serif-condensed" />
 
             <TextView
                 android:id="@+id/tvCIudad"

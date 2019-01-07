@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity
         {
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
+            }else
+            {
+                salir();
             }
         }
         else if (currentFragment instanceof FormularioFragment) {
@@ -109,6 +112,12 @@ public class MainActivity extends AppCompatActivity
             {
                 fm.beginTransaction().replace(R.id.content_main,new EstatusFragment()).commit();
 
+            }
+        }
+        else if (currentFragment instanceof EditClienteFragment) {
+            if(fm.getBackStackEntryCount()> 0)
+            {
+                getSupportFragmentManager().popBackStack();
             }
         }
         else if(fm.getBackStackEntryCount()> 0)
@@ -130,7 +139,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

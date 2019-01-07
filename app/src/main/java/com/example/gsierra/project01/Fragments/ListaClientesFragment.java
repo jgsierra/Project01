@@ -111,6 +111,7 @@ public class ListaClientesFragment extends Fragment implements  SearchView.OnQue
             }
         });
 
+
         mainActivity = (MainActivity) getActivity();
         mainActivity.showFloatingActionButton(); //fuerza la visibilidad
 

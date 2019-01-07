@@ -131,19 +131,17 @@ tools:context=".Fragments.EditClienteFragment"
             android:textSize="14sp"
             app:fontFamily="sans-serif-condensed" />
 
-        <EditText
-            android:id="@+id/etFecha"
-            android:layout_width="159dp"
+        <TextView
+            android:id="@+id/tvFecNac_Dialog"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_background"
-            android:ems="10"
-            android:focusable="auto"
-            android:hint="dd/mm/yyyy"
-            android:inputType="date"
-            android:singleLine="true" />
+            android:text="dd/mm/aaaa"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/tvCiudadc"
@@ -365,6 +363,7 @@ tools:context=".Fragments.EditClienteFragment"
             <!--android:drawableEnd="@android:drawable/ic_menu_search"-->
             <!--android:text="Buscar" />-->
         </LinearLayout>
+
     </LinearLayout>
 
 

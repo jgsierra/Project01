@@ -1,6 +1,7 @@
 package com.example.gsierra.project01.Fragments;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,9 +28,11 @@ import android.widget.Toast;
 
 import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
+import com.example.gsierra.project01.entidades.Clientes;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,18 +55,19 @@ public class DatosPersonalesFragment extends Fragment {
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL+CARPETA_IMAGEN;
     private String path;
 
-    File fileImagen;
-    Bitmap bitmap;
-    EditText etNombre;
-    TextView tvNombre;
+    private File fileImagen;
+    private Bitmap bitmap;
+    private EditText etNombre;
+    private TextView tvNombre;
     private static final int COD_SELECCIONADO=10;
     private static final int COD_FOTO=20;
+    private int dia,mes,anio;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ImageView ivUser;
-
+    private TextView tvFec;
     private OnFragmentInteractionListener mListener;
 
     public DatosPersonalesFragment() {
@@ -116,6 +121,14 @@ public class DatosPersonalesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mostrarDialogoOpciones();
+            }
+        });
+        tvFec  =vista.findViewById(R.id.etFechaPicker);
+        tvFec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View vista = v;
+                setFecha(vista);
             }
         });
         return  vista;
@@ -226,6 +239,22 @@ public class DatosPersonalesFragment extends Fragment {
 
             startActivityForResult(intent,COD_FOTO);
         }
+    }
+
+    private  void setFecha(View vista)
+    {
+        final Calendar c= Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        anio = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(vista.getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+               tvFec.setText(dayOfMonth + "/" + (month+1) + "/"  + year);
+            }
+        },dia,mes,anio);
+        datePickerDialog.show();
     }
 
     @Override

@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -22,6 +23,9 @@ public interface ClienteService {
 
     @POST("PostClientes")
     Call<Void> create(@Body Clientes cliente);
+
+    @PUT("Clientes/{id}")
+    Call<Void> edit(@Path("id") int idd,@Body Clientes cliente);
 
     @GET("ClientesFilter/{keyword}")
     Call<List<Clientes>> getAllFilter();

@@ -15,33 +15,4 @@ public  class ConfiguracionActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.configuraciones);
     }
-
-
-
-//    public static class MainConfiguracionActivity extends PreferenceFragment
-//   {
-//       @Override
-//       public void onCreate(Bundle savedInstanceState) {
-//           super.onCreate(savedInstanceState);
-//           addPreferencesFromResource(R.xml.configuraciones);
-//
-//       }
-//   }
-
-    //@Override
-//    public void onResume() {
-//        super.onResume();
-//        if (!getUserVisibleHint()) {
-//            return;
-//        }
-//
-//        MainActivity mainActivity = (MainActivity) getActivity();
-//
-//        if (mainActivity != null) {
-//
-//            mainActivity.hideFloatingActionButton();
-//            mainActivity.getSupportActionBar().show();
-//
-//        }
-//    }
 }

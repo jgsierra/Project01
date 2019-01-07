@@ -1,6 +1,7 @@
 package com.example.gsierra.project01.Fragments;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,12 +52,13 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class EditClienteFragment extends Fragment {
-    private  int idcliente;
+    private  int idcliente,dia,mes,anio;
     private OnFragmentInteractionListener mListener;
-    private TextView tvcodigo,tvEdad;
-    private EditText etNombrel,etApellidol,etFecha,etDireccion,etTeleFijo,etTeleMovil,etEmailM;
+    private TextView tvcodigo,tvEdad,tvFecNacDialog;
+    private EditText etNombrel,etApellidol,etDireccion,etTeleFijo,etTeleMovil,etEmailM;
     private Spinner sp_ciudad,sp_provi,sp_sexo,sp_ocup;
     private Button btnAceptar,btnCancelar;
+
     public EditClienteFragment() {
         // Required empty public constructor
     }
@@ -118,8 +122,10 @@ public class EditClienteFragment extends Fragment {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        etFecha.setText(cliente.getFecha_Nac());
-//                    sp_ciudad
+                        tvFecNacDialog.setText(cliente.getFecha_Nac());
+                        //tvFecNacDialog.setText(fecha.toString());
+
+                        //                    sp_ciudad
                       sp_provi.setSelection(Integer.parseInt(cliente.getProvincia()));
 //                    sp_sexo
 //                    sp_ocup
@@ -151,7 +157,7 @@ public class EditClienteFragment extends Fragment {
         etDireccion = vista.findViewById(R.id.etDireccion);
         etEmailM = vista.findViewById(R.id.etEmailM);
         tvcodigo  = vista.findViewById(R.id.tvcodigo);
-        etFecha = vista.findViewById(R.id.etFecha);
+        //etFecha = vista.findViewById(R.id.etFecha);
         sp_ciudad  = (Spinner)vista.findViewById(R.id.sp_ciudad);
         sp_provi  = (Spinner)vista.findViewById(R.id.sp_provi);
         sp_provi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,7 +195,14 @@ public class EditClienteFragment extends Fragment {
                mac.onBackPressed();
             }
         });
-
+        tvFecNacDialog = vista.findViewById(R.id.tvFecNac_Dialog);
+        tvFecNacDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View vista = v;
+                setFecha(vista);
+            }
+        });
         CargarSpinnerss();
     }
 
@@ -249,7 +262,18 @@ public class EditClienteFragment extends Fragment {
         cliente.setApellido(etApellidol.getText().toString());
         //cliente.setEdad(Integer.parseInt(tvEdad.toString()));
         cliente.setEdad(44);
-        cliente.setFecha_Nac("10-05-1987");
+        String fec = tvFecNacDialog.getText().toString();
+//        Long fec2 = Date.parse(fec);
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
+//        Date date=null;
+//        try{
+//            date = simpleDateFormat.parse(fec);
+//        }
+//        catch (ParseException e)
+//        {e.printStackTrace();
+//        }
+        cliente.setFecha_Nac(fec);
+
         Provincias c = (Provincias)sp_ciudad.getSelectedItem();
         cliente.setCiudad(c.toString());
         Provincias p = (Provincias)sp_provi.getSelectedItem();
@@ -261,21 +285,50 @@ public class EditClienteFragment extends Fragment {
         cliente.setOcupacion("Sin empleo");
         cliente.setEmail(etEmailM.getText().toString());
 
-        Call call = clienteService.create(cliente);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
+        int id = Integer.parseInt(tvcodigo.getText().toString());
 
-                Toast.makeText(getContext(),response.message()+" code - "+ String.valueOf(response.code()),Toast.LENGTH_LONG).show();
-                Activity mac = (Activity) getContext();
-                mac.onBackPressed();
-            }
+        if (id==0)
+        {
+            Call call = clienteService.create(cliente);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(getContext(),response.message()+" code - "+ String.valueOf(response.code()),Toast.LENGTH_LONG).show();
+                    Activity mac = (Activity) getContext();
+                    mac.onBackPressed();
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call call, Throwable t) {
+
+                }
+            });
+        }
+        else
+        {
+            cliente.setCodigo(idcliente);
+            Call call = clienteService.edit(id,cliente);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+
+                    Toast.makeText(getContext(),response.message()+" code - "+ String.valueOf(response.code()),Toast.LENGTH_LONG).show();
+                    Activity mac = (Activity) getContext();
+                    mac.onBackPressed();
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(getContext()," Error al editar el cliente ",Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+
+
+
     }
 
     public class loadSpinnerTask extends AsyncTask<Integer, Integer, ArrayAdapter<Provincias>> {
@@ -327,6 +380,22 @@ public class EditClienteFragment extends Fragment {
             mainActivity.getSupportActionBar().show();
 
         }
+    }
+
+    private  void setFecha(View vista)
+    {
+        final Calendar c= Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        anio = c.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(vista.getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                tvFecNacDialog.setText(dayOfMonth + "/" + (month+1) + "/"  + year);
+            }
+        },dia,mes,anio);
+        datePickerDialog.show();
     }
 
     }
