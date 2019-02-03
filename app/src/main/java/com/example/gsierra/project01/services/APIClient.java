@@ -10,7 +10,7 @@ public class APIClient {
 
     public static Retrofit getClient(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://jgs.somee.com/api/")
+                .baseUrl("http://apijgs.somee.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit;

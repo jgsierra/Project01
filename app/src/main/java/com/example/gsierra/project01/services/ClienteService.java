@@ -33,4 +33,8 @@ public interface ClienteService {
     @DELETE("Clientes/{id}")
     Call<Void> delete(@Path("id") int id);
 
+    @GET("Cumples")
+    Call<List<Clientes>> getCumpleaños();
+
+
 }

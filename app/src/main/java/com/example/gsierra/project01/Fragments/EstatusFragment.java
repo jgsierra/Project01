@@ -4,12 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.gsierra.project01.MainActivity;
 import com.example.gsierra.project01.R;
+import com.example.gsierra.project01.Adapters.ReciclerViewCumplAdapter;
+import com.example.gsierra.project01.entidades.Clientes;
+import com.example.gsierra.project01.services.APIClient;
+import com.example.gsierra.project01.services.ClienteService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -31,6 +44,11 @@ public class EstatusFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    RecyclerView rvCumple;
+    ReciclerViewCumplAdapter adapter;
+    List<Clientes> listcumplclientes;
+    ProgressBar pb;
+
 
     public EstatusFragment() {
         // Required empty public constructor
@@ -81,7 +99,15 @@ public class EstatusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_estatus, container, false);
+        final View vista = inflater.inflate(R.layout.fragment_estatus, container, false);
+
+        rvCumple = vista.findViewById(R.id.reciclerCumpleanios);
+        rvCumple.setLayoutManager(new LinearLayoutManager(getContext()));
+        pb = vista.findViewById(R.id.pbarCumple);
+
+        cargarDatos();
+
+        return vista;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -121,5 +147,26 @@ public class EstatusFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private  void cargarDatos()
+    {
+        ClienteService clienteService = APIClient.getClient().create(ClienteService.class);
+        Call call = clienteService.getCumpleaños();
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                listcumplclientes = (List<Clientes>) response.body();
+                adapter = new ReciclerViewCumplAdapter(listcumplclientes);
+                rvCumple.setAdapter(adapter);
+                rvCumple.setVisibility(View.VISIBLE);
+                pb.setVisibility(View.GONE);
+   //                tvCargando.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 }

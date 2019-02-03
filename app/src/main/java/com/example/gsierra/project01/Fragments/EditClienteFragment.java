@@ -32,6 +32,7 @@ import com.example.gsierra.project01.services.ClienteService;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -123,7 +124,6 @@ public class EditClienteFragment extends Fragment {
                             e.printStackTrace();
                         }
                         tvFecNacDialog.setText(cliente.getFecha_Nac());
-                        //tvFecNacDialog.setText(fecha.toString());
 
                         //                    sp_ciudad
                       sp_provi.setSelection(Integer.parseInt(cliente.getProvincia()));

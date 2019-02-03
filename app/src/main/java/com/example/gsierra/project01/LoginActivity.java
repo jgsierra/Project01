@@ -3,9 +3,11 @@ package com.example.gsierra.project01;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.inputmethodservice.InputMethodService;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,11 +27,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvolvideusrio;
+    private LinearLayout lyHead,lyFooter;
+    private Button btnsalir,btnayuda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,9 +97,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mbtnRegitrare = (Button) findViewById(R.id.btnRegistrarse);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 attemptLogin();
             }
         });
@@ -101,6 +109,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         Logo = findViewById(R.id.image_logo);
+        lyHead = findViewById(R.id.lyHeader);
+        lyFooter= findViewById(R.id.lyFooter);
+        btnayuda = findViewById(R.id.btnAyuda);
+        btnsalir= findViewById(R.id.btnSalir);
     }
 
     private void populateAutoComplete() {
@@ -156,7 +168,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
-
+        InputMethodManager Imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        Imm.hideSoftInputFromWindow(mPasswordView.getWindowToken(),0);
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -239,6 +252,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             });
             int visibility = show ? View.GONE : View.VISIBLE;
             Logo.setVisibility(visibility);
+            lyHead.setVisibility(visibility);
+            lyFooter.setVisibility(visibility);
+            btnsalir.setVisibility(visibility);
+            btnayuda.setVisibility(visibility);
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
@@ -246,6 +263,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             int visibility = show ? View.VISIBLE : View.GONE;
             Logo.setVisibility(visibility);
+            lyHead.setVisibility(visibility);
+            lyFooter.setVisibility(visibility);
+            btnsalir.setVisibility(visibility);
+            btnayuda.setVisibility(visibility);
         }
     }
 

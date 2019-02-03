@@ -59,7 +59,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Numero DNI</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Iniciar Sesion o registrarse</string>
+    <string name="action_login_in">Iniciar Sesion</string>
+    <string name="action_sign_in">Registrarse</string>
     <string name="action_sign_in_short">Iniciar Sesion</string>
     <string name="error_invalid_email">El DNI es invalido</string>
     <string name="error_invalid_password">La contraseña es demasiado corta</string>
