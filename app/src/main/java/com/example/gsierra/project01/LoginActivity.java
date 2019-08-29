@@ -61,6 +61,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     };
     private static final String DUMMY_USER_ID = "30952260";
     private static final String DUMMY_PASSWORD = "admin123";
+    
+    /*comentario desde VSCODE*/
+    
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
