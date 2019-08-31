@@ -11,7 +11,9 @@ import java.util.Date;
  * a parsear. Si echamos un vistazo a la información que obtenemos en cada petición, el objeto JSON que obtenemos consta
  * únicamente de string, números y arrays de string, a excepcion del atributo poster que es un objeto JSON anidado.
  * Por lo tanto deberemos crear dos clase una para la información de la película y otra para la del póster. El nombre de las
- * propiedades de las clases deben coincidir con el nombre de los atributos del objeto JSON que vamos a seleccionar: */
+ * propiedades de las clases deben coincidir con el nombre de los atributos del objeto JSON que vamos a seleccionar: 
+ FIN COMENTARIO
+ */
 public class Clientes {
 
 
