@@ -4,7 +4,7 @@ import com.example.gsierra.project01.Fragments.ListaClientesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**provincia */
 public class Provincias {
     public int getId_provincia() {
         return id_provincia;
